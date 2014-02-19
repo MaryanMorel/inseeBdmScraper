@@ -1,5 +1,7 @@
 # INSEE BDM Scraper
-Python utility based on Scrapy & Pandas LINKS for BDM data download automation (as there is no API for now). Please read the [INSEE copyright notice](http://www.insee.fr/en/publications-et-services/default.asp?page=copyright.htm) before any scraping.
+Python utility based on [Scrapy](http://scrapy.org/) & [Pandas](http://pandas.pydata.org/) for BDM data download automation (as there is no API for now). This utility is meant to download monthly series as they are the most common in the BDM database. If you want to extract quarterly or weekly data, you may have to hack the spider.
+
+Please read the [INSEE copyright notice](http://www.insee.fr/en/publications-et-services/default.asp?page=copyright.htm) before any scraping.
 
 Tested on ubuntu 13.10
 
@@ -18,11 +20,11 @@ Be sure to have the all the dependencies installed (see below)
 ## Usage
 Insee BDM series are identified by an `idbank`. You can find it when you search for data:
 
-![insee_idbank_search.png][/screenshots/insee_idbank_search.png]
+![insee_idbank_search.png](screenshots/insee_idbank_search.png)
 
 When you look at data:
 
-![insee_idbank_table.png][/screenshots/insee_idbank_table.png]
+![insee_idbank_table.png](screenshots/insee_idbank_table.png)
 
 Or in the url of the series view page:
 
