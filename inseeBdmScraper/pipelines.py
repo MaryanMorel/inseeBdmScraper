@@ -6,6 +6,7 @@
 from scrapy import signals
 from scrapy.contrib.exporter import CsvItemExporter
 import pandas as pd
+import os
 
 class CsvExportPipeline(object):
 	""" A pipeline for exporting data to csv
@@ -15,30 +16,14 @@ class CsvExportPipeline(object):
 	def __init__(self):
 		self.files = {}
 
-	# @classmethod
-	# def from_crawler(cls, crawler):
-	# 	pipeline = cls()
-	# 	crawler.signals.connect(pipeline.spider_opened, signals.spider_opened)
-	# 	crawler.signals.connect(pipeline.spider_closed, signals.spidegr_closed)
-	# 	return pipeline
-
-	# def spider_opened(self, spider):
-	# 	file = open('insee_idBank_%s.csv' % spider.idBank, 'w+b')
-	# 	self.files[spider] = file
-	# 	self.exporter = CsvItemExporter(file, encoding='utf8', fields_to_export=['year', 'month', 'values'])
-	# 	self.exporter.start_exporting()
-
-	# def spider_closed(self, spider):
-	# 	self.exporter.finish_exporting()
-	# 	file = self.files.pop(spider)
-	# 	file.close()
-
-	# def process_item(self, item, spider):
-	# 	self.exporter.export_item(item)
-	# 	return item
+	@classmethod
+	def from_crawler(cls, crawler):
+		os.chdir(crawler.settings['OUTPUT_PATH'])
+		pipeline = cls()
+		return pipeline
 
 	def process_item(self, item, spider):
-		with open('scraped_data/insee_idBank_'+spider.idBank+'.csv', 'w') as f:
+		with open('insee_idBank_'+spider.idBank+'.csv', 'w') as f:
 			f.write('idBank: '+item['idBank']+'\n')
 			f.write('Informations: '+item['series_info']+'\n')
 			f.write('Source: INSEE\n')

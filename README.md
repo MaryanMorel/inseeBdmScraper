@@ -31,11 +31,11 @@ Or in the url of the series view page:
 [http://www.bdm.insee.fr/bdm2/affichageSeries.action?idbank=**001565530**&codeGroupe=1007](http://www.bdm.insee.fr/bdm2/affichageSeries.action?idbank=001565530&codeGroupe=1007)
 
 In order to use the scraper, just run the following commands in your terminal: 
-
-	cd ~/path/to/inseeBdmScraper
+	
+	cd ~/path/to/inseeBdmScraper			
 	scrapy crawl insee -a idBank=001565530
 
-Scraped data will be available in the `scraped_data` directory (.csv, utf8 encoding).
+The first line set your working directory to inseeBdmScraper root directory, the second line execute the scraper. By default, Scraped data will be available in your home directory (.csv, utf8 encoding). You can change this behaviour by editing the `OUTPUT_PATH` variable in settings.py.
 
 Crawl responsibly by identifying yourself (and your website) on the user-agent, edit the settings.py file :
 
