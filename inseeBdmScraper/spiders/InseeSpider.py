@@ -10,7 +10,7 @@ class InseeSpider(Spider):
     def __init__(self, idBank=None, *args, **kwargs):
         super(InseeSpider, self).__init__(*args, **kwargs)
         self.idBank = str(idBank)
-        self.start_urls = start_urls = ["http://www.bdm.insee.fr/bdm2/affichageSeries.action?idbank=%s&codeGroupe=389" %idBank]
+        self.start_urls = start_urls = ["http://www.bdm.insee.fr/bdm2/affichageSeries.action?idbank=%s" %idBank]
 
     def parse(self, response):
         sel= Selector(response)
@@ -19,5 +19,5 @@ class InseeSpider(Spider):
         inseeItem['series_info'] = sel.xpath('//thead//tr//th/text()').extract()[0].replace('\t', '').replace('\n','')
         inseeItem['month'] = sel.xpath('//tbody//tr//th/text()').re('[a-zA-Z]+')
         inseeItem['year'] = sel.xpath('//tbody//tr//th/text()').re('\d+')
-        inseeItem['values'] = sel.xpath('//tbody//tr//td').re('\d+')
+        inseeItem['values'] = map(lambda x: x.replace(',', ''), sel.xpath('//tbody//tr//td').re('[0-9,.]+'))
         return inseeItem
